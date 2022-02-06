@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { useSearchParams } from "remix";
+import { useSearchParams, useTransition } from "remix";
 
 import { RoverImage } from "~/api";
 import SlideshowImg from "./SlideshowImg";
@@ -11,6 +11,7 @@ function useSlideShow(initialOptions: {
   imgCount: number;
   isPaused: boolean;
 }) {
+  const transition = useTransition();
   const [speed, setSpeed] = useState(initialOptions.speed);
   const [slideIndex, setSlideIndex] = useState(initialOptions.slideIndex);
   const [isPaused, setIsPaused] = useState(initialOptions.isPaused);
@@ -41,10 +42,15 @@ function useSlideShow(initialOptions: {
       return;
     }
 
-    const interval = setInterval(nextSlide, speed);
+    if (transition.state === "loading") {
+      // if the timeout is shorter than the time it takes to fetch the image
+      // we don't want to move on.. we want to show the image for the $speed delay
+      return;
+    }
 
+    const interval = setInterval(nextSlide, speed);
     return () => clearInterval(interval);
-  }, [isPaused, speed, nextSlide]);
+  }, [isPaused, speed, nextSlide, transition.state]);
 
   const togglePause = useCallback(
     () => setIsPaused(!isPaused),
@@ -67,12 +73,12 @@ function useSlideShow(initialOptions: {
 interface Props {
   img: RoverImage;
   imgCount: number;
-  isLoading: boolean;
 }
 
 const DEFAULT_SPEED = 3000;
 
-export default function Slideshow({ img, imgCount, isLoading }: Props) {
+export default function Slideshow({ img, imgCount }: Props) {
+  const transition = useTransition();
   const [searchParams, setSearchParams] = useSearchParams();
   const {
     slideIndex,
@@ -127,7 +133,7 @@ export default function Slideshow({ img, imgCount, isLoading }: Props) {
 
   return (
     <div>
-      <SlideshowImg img={img} isLoading={isLoading} />
+      <SlideshowImg img={img} isLoading={transition.state === "loading"} />
       <div className="slideshow-footer">
         <div className="slideshow-slidecount">
           #{slideIndex + 1} of {imgCount}

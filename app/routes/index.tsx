@@ -1,6 +1,5 @@
 import {
   useLoaderData,
-  useTransition,
   json,
   HeadersFunction,
   ShouldReloadFunction,
@@ -70,7 +69,6 @@ export const unstable_shouldReload: ShouldReloadFunction = ({
 };
 
 export default function Index() {
-  const transition = useTransition();
   const loaderResp = useLoaderData<LoaderResponse>();
 
   return (
@@ -79,11 +77,7 @@ export default function Index() {
       {loaderResp.type === "ERROR" ? (
         <pre>{JSON.stringify(loaderResp.error, null, 2)}</pre>
       ) : (
-        <Slideshow
-          img={loaderResp.img}
-          imgCount={loaderResp.imgCount}
-          isLoading={transition.state === "loading"}
-        />
+        <Slideshow img={loaderResp.img} imgCount={loaderResp.imgCount} />
       )}
     </div>
   );
