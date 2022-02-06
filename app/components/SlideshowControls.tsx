@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Emoji from "a11y-react-emoji";
 
 interface Props {
@@ -22,6 +23,30 @@ export default function SlideshowControls(props: Props) {
     speed,
     isPaused,
   } = props;
+
+  useEffect(() => {
+    function arrowKeyListener(this: Document, event: KeyboardEvent) {
+      if (event.defaultPrevented) {
+        return; // Do nothing if the event was already processed
+      }
+
+      switch (event.key) {
+        case "ArrowLeft":
+          prevSlide();
+          break;
+        case "ArrowRight":
+          nextSlide();
+          break;
+        default:
+          break;
+      }
+    }
+
+    document.addEventListener("keydown", arrowKeyListener);
+
+    return () => document.removeEventListener("keydown", arrowKeyListener);
+  }, [prevSlide, nextSlide]);
+
   return (
     <div className="slideshow-btns">
       <button
@@ -58,7 +83,7 @@ export default function SlideshowControls(props: Props) {
       <button className="slideshow-btn" onClick={jumpToEnd} title="Last slide">
         <Emoji symbol="⏭" label="Last slide" />
       </button>
-      <label className="speed-slider" style={{ fontSize: 16 }}>
+      <label className="speed-slider">
         {speed / 1000} sec
         <input
           title="speed"

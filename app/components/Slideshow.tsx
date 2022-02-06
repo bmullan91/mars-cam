@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useSearchParams } from "remix";
+
 import { RoverImage } from "~/api";
 import SlideshowImg from "./SlideshowImg";
 import SlideshowControls from "./SlideshowControls";
@@ -67,8 +68,6 @@ interface Props {
   img: RoverImage;
   imgCount: number;
   isLoading: boolean;
-  // onSlideChange: (slideIndex: number) => void;
-  // onPauseToggle: (isPaused: boolean) => void;
 }
 
 const DEFAULT_SPEED = 3000;
