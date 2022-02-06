@@ -16,6 +16,17 @@ body {
   margin: 0 calc(var(--outer-gutter) * -1);
 }
 
+.slideshow-img {
+  position: relative;
+}
+
+.slideshow-img .img-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .img-wrapper {
   display: flex;
   position: relative;
@@ -28,6 +39,10 @@ body {
 .img-wrapper > img {
   max-width: 100%;
   object-fit: contain;
+}
+
+.img-loading {
+  visibility: visible;
 }
 
 .img-wrapper:hover > .img-meta-data {
