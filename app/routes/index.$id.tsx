@@ -1,7 +1,6 @@
-import { redirect, useParams } from "remix";
+import { redirect, useParams, Link } from "remix";
 import type { LoaderFunction } from "remix";
 import invariant from "tiny-invariant";
-import { Link } from "react-router-dom";
 
 export const loader: LoaderFunction = async ({ params, request }) => {
   invariant(params.id, "image id is required");
