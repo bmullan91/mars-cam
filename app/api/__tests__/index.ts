@@ -17,7 +17,7 @@ const mockRoverImg = (): RoverImage => ({
       id: 1,
       landing_date: new Date().toISOString(),
       launch_date: new Date().toISOString(),
-      name: "Curiosity",
+      name: "Perseverance",
       status: "ok",
     },
     sol: 1,

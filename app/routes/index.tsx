@@ -14,7 +14,7 @@ import type { RoverImage } from "~/api";
 
 // Components
 import Header from "~/components/Header";
-import Slideshow from "~/components/SlideShow";
+import Slideshow from "~/components/Slideshow";
 
 interface LoaderData {
   imgCount: number;

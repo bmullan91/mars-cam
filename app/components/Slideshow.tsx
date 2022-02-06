@@ -1,4 +1,3 @@
-import Emoji from "a11y-react-emoji";
 import { useState, useCallback, useEffect } from "react";
 import { useSearchParams } from "remix";
 import { RoverImage } from "~/api";
