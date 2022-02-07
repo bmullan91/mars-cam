@@ -75,7 +75,7 @@ interface Props {
   imgCount: number;
 }
 
-const DEFAULT_SPEED = 3000;
+const DEFAULT_SPEED = 5000;
 
 export default function Slideshow({ img, imgCount }: Props) {
   const transition = useTransition();
