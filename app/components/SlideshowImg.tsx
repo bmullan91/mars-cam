@@ -12,7 +12,7 @@ export default function SlideshowImg({ img, isLoading }: Props) {
       <div
         className={isLoading ? "img-wrapper fade-out" : "img-wrapper fade-in"}
       >
-        <img src={img.images.base64} />
+        <img src={img.images.base64} alt={`image ${img.index}`} />
         <div className="img-meta-data">
           <p>Sol: {img.metadata.sol}</p>
           <p>Earth Date: {img.metadata.earth_date}</p>

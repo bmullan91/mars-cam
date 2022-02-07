@@ -5,7 +5,7 @@ const mockFetch = jest.fn();
 const api = new RoverAPI({ fetch: mockFetch });
 const realApi = new RoverAPI();
 
-const mockRoverImg = (): RoverImage => ({
+export const mockRoverImg = (): RoverImage => ({
   images: { ascii: "", base64: "" },
   index: "0",
   metadata: {

@@ -52,7 +52,7 @@ export default function SlideshowControls(props: Props) {
       <button
         className="slideshow-btn"
         onClick={jumpToStart}
-        arial-label="Jump to start"
+        arial-label="First slide"
       >
         <Emoji symbol="⏮" label="First slide" />
       </button>
@@ -67,13 +67,12 @@ export default function SlideshowControls(props: Props) {
       <button
         onClick={togglePause}
         className="slideshow-btn"
-        arial-label={isPaused ? "Resume" : "Pause"}
         title={isPaused ? "Resume" : "Pause"}
       >
         {isPaused ? (
-          <Emoji symbol="▶️" label="play" />
+          <Emoji symbol="▶️" label="Play" />
         ) : (
-          <Emoji symbol="⏸️" label="pause" />
+          <Emoji symbol="⏸️" label="Pause" />
         )}
       </button>
 
@@ -86,7 +85,7 @@ export default function SlideshowControls(props: Props) {
       <label className="speed-slider">
         {speed / 1000} sec
         <input
-          title="speed"
+          title="Slideshow speed"
           type="range"
           min="1000"
           max="10000"
