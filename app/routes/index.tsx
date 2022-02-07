@@ -29,7 +29,7 @@ type LoaderResponse = LoaderData | LoaderError;
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => {
   return {
-    "Cache-Control": loaderHeaders.get("Cache-Control") || "max-age=604800",
+    "Cache-Control": loaderHeaders.get("Cache-Control") || "s-maxage=60",
   };
 };
 
@@ -52,7 +52,7 @@ export const loader: LoaderFunction = async ({ request }) => {
       },
       {
         headers: {
-          "Cache-Control": "max-age=604800",
+          "Cache-Control": "s-maxage=60",
         },
       }
     );
