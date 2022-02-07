@@ -1,6 +1,7 @@
 import {
   useLoaderData,
   json,
+  redirect,
   HeadersFunction,
   ShouldReloadFunction,
 } from "remix";
@@ -35,9 +36,15 @@ export const headers: HeadersFunction = ({ loaderHeaders }) => {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const api = useRoverAPI();
-  let url = new URL(request.url);
-  let slideIndex = parseInt(url.searchParams.get("index") || "0");
+  const url = new URL(request.url);
+  const index = url.searchParams.get("index");
 
+  if (!index) {
+    url.searchParams.set("index", "0");
+    return redirect(`/?${url.searchParams.toString()}`);
+  }
+
+  const slideIndex = parseInt(index);
   try {
     const [imgCount, img] = await Promise.all([
       api.getImageCount(),
